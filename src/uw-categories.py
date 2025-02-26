@@ -73,10 +73,9 @@ while True:
         categories_json = categories_response.json()
 
         # calculate amount of hidden/visible categories
-        if not "parse" in categories_json:
-            print(page)
-            print(categories_json, flush-True)
+        if "error" in categories_json:
             continue
+
         categories = categories_json["parse"]["categories"]
         categories_hidden = len([cat for cat in categories if "hidden" in cat.keys()])
         categories_other = len([cat for cat in categories if "hidden" not in cat.keys()])
@@ -97,7 +96,7 @@ while True:
         break
 
 
-print(f"{start.strftime("%Y-%m-%d")} - {end.strftime("%Y-%m-%d")}")
+print(f"{start.strftime("%Y-%m-%d")} - {stop.strftime("%Y-%m-%d")}")
 print(f"Uploads: {sum_files}")
 print(f"- With non-hidden category: {sum_files - sum_zero_categories} ({(sum_files - sum_zero_categories) / sum_files * 100:.2f}%)")
 print(f"- Without non-hidden category: {sum_zero_categories} ({sum_zero_categories / sum_files * 100:.2f}%)")
