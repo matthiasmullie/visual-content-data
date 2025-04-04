@@ -119,7 +119,7 @@ for day in range((stop - start).days):
                 deletion_request_response_json = deletion_request_response.json()
                 if not "error" in deletion_request_response_json:
                     deletion_request_response_wikitext = deletion_request_response_json["parse"]["wikitext"]["*"]
-                    deletion_request_pages = list(set(re.findall("\\[\\[:?((File|Image):[^|]+?)\\]\\]", deletion_request_response_wikitext)))
+                    deletion_request_pages = list(set(re.findall("\\[\\[:?((?:File|Image):[^|]+?)\\]\\]", deletion_request_response_wikitext)))
                     deletion_request_page_count += len(deletion_request_pages)
                     deletion_request_pending_page_count += len(deletion_request_pages)
 
@@ -156,7 +156,7 @@ for day in range((stop - start).days):
                 deletion_request_response_json = deletion_request_response.json()
                 if not "error" in deletion_request_response_json:
                     deletion_request_response_wikitext = deletion_request_response_json["parse"]["wikitext"]["*"]
-                    deletion_request_pages = list(set(re.findall("\\[\\[:?((File|Image):[^|]+?)\\]\\]", deletion_request_response_wikitext)))
+                    deletion_request_pages = list(set(re.findall("\\[\\[:?((?:File|Image):[^|]+?)\\]\\]", deletion_request_response_wikitext)))
                     deletion_request_deleted_count += 1 if "'''Deleted:'''" in deletion_request_response_wikitext else 0
                     deletion_request_kept_count += 1 if "'''Kept:'''" in deletion_request_response_wikitext else 0
 
